@@ -1,0 +1,28 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: opentour-2022-hello
+  labels:
+    app: opentour-2022-hello
+    app.kubernetes.io/component: opentour-2022-hello
+    app.kubernetes.io/instance: opentour-2022-hello
+    app.kubernetes.io/name: opentour-2022-hello
+    app.kubernetes.io/part-of: opentour-2022-hello
+    app.openshift.io/runtime-version: main
+spec:
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: 8443-tcp
+      protocol: TCP
+      port: 8443
+      targetPort: 8443
+  internalTrafficPolicy: Cluster
+  sessionAffinity: None
+  selector:
+    app: opentour-2022-hello
+    deployment: opentour-2022-hello
+status: {}
+

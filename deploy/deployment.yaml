@@ -1,0 +1,53 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: opentour-2022-hello
+  labels:
+    app: opentour-2022-hello
+    app.kubernetes.io/component: opentour-2022-hello
+    app.kubernetes.io/instance: opentour-2022-hello
+    app.kubernetes.io/name: opentour-2022-hello
+    app.kubernetes.io/part-of: opentour-2022-hello
+    app.openshift.io/runtime: java
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: opentour-2022-hello
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: opentour-2022-hello
+        deployment: opentour-2022-hello
+    spec:
+      containers:
+        - name: opentour-2022-hello
+          image: quay.io/sa-mw-dach/opentour-2022-hello:main
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+            - containerPort: 8443
+              protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: opentour-2022-hello
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+      imagePullSecrets: []
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+  paused: false
+status: {}

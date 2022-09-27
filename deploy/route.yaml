@@ -1,0 +1,24 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: opentour-2022-hello
+  labels:
+    app: opentour-2022-hello
+    app.kubernetes.io/component: opentour-2022-hello
+    app.kubernetes.io/instance: opentour-2022-hello
+    app.kubernetes.io/name: opentour-2022-hello
+    app.kubernetes.io/part-of: opentour-2022-hello
+    app.openshift.io/runtime-version: main
+spec:
+  host: opentour-2022-hello-rbohne-app.apps.demo.openshift.pub
+  to:
+    kind: Service
+    name: opentour-2022-hello
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+status: {}
