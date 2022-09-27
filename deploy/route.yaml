@@ -10,7 +10,6 @@ metadata:
     app.kubernetes.io/part-of: opentour-2022-hello
     app.openshift.io/runtime-version: main
 spec:
-  host: opentour-2022-hello-rbohne-app.apps.demo.openshift.pub
   to:
     kind: Service
     name: opentour-2022-hello

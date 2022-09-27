@@ -33,9 +33,9 @@ spec:
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
           imagePullPolicy: IfNotPresent
-          envFrom:
-            - configMapRef:
-                name: opentour-2022-hello
+          env:
+            - name: LOCATION
+              value: OEBB
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
